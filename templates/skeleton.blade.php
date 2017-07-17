@@ -17,13 +17,17 @@
 		<link rel="shortcut icon" href="<?php echo Theme::base('img/favicon.ico') ?>" type="image/x-icon">
 
 		<link href="<?php echo Theme::base('css/app.min.css') ?>" rel="stylesheet">
+		<link rel="stylesheet" href="<?php echo Theme::base('vendor/bootstrap/dist/css/bootstrap.min.css')?>">
+		<link href="<?php echo Theme::base('css/style.css') ?>" rel="stylesheet">
 
 		@section('customcss')
 			<!-- Custom CSS -->
 		@show
 
+		<script src="<?php echo Theme::base('vendor/jquery/dist/jquery.min.js')?>"></script>
 		<script type="text/javascript" src="<?php echo Theme::base('js/app.min.js') ?>"></script>
 		<script type="text/javascript" src="<?php echo Theme::base('js/custom.js') ?>"></script>
+		<script src="<?php echo Theme::base('vendor/bootstrap/dist/js/bootstrap.min.js')?>"></script>
 
 		@section('customjs')
 			<!-- Custom JS -->
@@ -165,6 +169,16 @@
 					<ul class="nav with-icon">
 						<li><a href="<?php echo URL::site() ?>"><i class="icn-left xn xn-home"></i> Dashboard <span class="icn-right badge round solid error">10</span></a></li>
 						<li class="devider"></li>
+						@if(f('auth.allowed', '/event'))
+						<li><a href="<?php echo URL::site('event') ?>"><i class="icn-left xn xn-book-open"></i> Event <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						@endif
+						@if(f('auth.allowed', '/attendance'))
+						<li><a href="<?php echo URL::site('attendance') ?>"><i class="icn-left xn xn-book-open"></i> Attendance <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						@endif
+						@if(f('auth.allowed', '/category'))
+						<li><a href="<?php echo URL::site('category') ?>"><i class="icn-left xn xn-book-open"></i> Category <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						@endif
+
 						@if(f('auth.allowed', '/table'))
 						<li><a href="<?php echo URL::site('table') ?>"><i class="icn-left xn xn-book-open"></i> Table View <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
@@ -222,5 +236,26 @@
 				</main>
 			@show
 		@show
+
+		@section('templatemodal')
+    	@show
+
+		<div id="deletemodal" class="modal fade" tabindex="-1" role="dialog">
+	        <div class="modal-dialog" role="document">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                    <h4 class="modal-title">Modal title</h4>
+	                </div>
+	                <div class="modal-body">
+	                    <p>One fine body&hellip;</p>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                    <button type="button" class="btn btn-primary">Save changes</button>
+	                </div>
+	            </div><!-- /.modal-content -->
+	        </div><!-- /.modal-dialog -->
+	    </div><!-- /.modal -->
 	</body>
 </html>

@@ -14,4 +14,11 @@ $(function(){
             window.location = finderUrl;
         }
     });
+
+    $("td a[href$='/delete'").click(function (e) {
+        e.preventDefault();
+
+        $('#deletemodal .modal-content').load($(this).attr("href"));
+        $('#deletemodal').modal('show');
+    });
 });

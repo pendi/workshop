@@ -94,7 +94,7 @@ foreach (f('controller')->schema() as $key => $field) {
                                         @foreach ($schema as $name => $field)
                                             <td>
                                                 @if($i++ === 0)
-                                                    <a href="{{ f('controller.url', '/'.$entry['$id']) }}">{{ substr($field->format('plain', $entry[$name], $entry), 0, 48) }}</a>
+                                                    <a href="{{ f('controller.url', '/'.$entry['$id'].'/update') }}">{{ substr($field->format('plain', $entry[$name], $entry), 0, 48) }}</a>
                                                 @else
                                                     <?php try { $string = strip_tags($entry->format($name)); echo substr($string, 0, 48); } catch(\Exception $e) { echo 'xxx'; var_dump($e); } ?>
                                                 @endif
@@ -126,6 +126,25 @@ foreach (f('controller')->schema() as $key => $field) {
     @endif
 @stop
 
+@section('templatemodal')
+    <div id="templatemodal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+@stop
 
 @section('contextual')
     @if($entries->count(true))

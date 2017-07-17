@@ -37,7 +37,7 @@ return array(
                 // to use mongo
                 'mongo' => array(
                     'driver' => 'Norm\\Connection\\MongoConnection',
-                    'database' => 'bono',
+                    'database' => 'workshop',
                 ),
             ),
             'collections' => array(
@@ -72,6 +72,9 @@ return array(
         'Bono\\Middleware\\ControllerMiddleware' => array(
             'default' => 'App\\Controller\\AppController',
             'mapping' => array(
+                '/category' => null,
+                '/event' => '\\App\Controller\\EventController',
+                '/attendance' => '\\App\Controller\\AttendanceController',
                 '/icons' => null,
                 '/table' => null,
                 '/list' => null,
