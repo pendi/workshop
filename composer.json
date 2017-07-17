@@ -1,0 +1,28 @@
+{
+    "name": "xinix-technology/bono-jacket",
+    "description": "Bono Jacket",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Xinix Technology",
+            "email": "hello@xinix.co.id"
+        }
+    ],
+     "autoload": {
+        "psr-0": {
+            "App": "src/"
+        }
+    },
+    "repositories": [ { "type": "vcs", "url": "git@github.com:xinix-technology/dapur-xinix.git" } ],
+    "require": {
+        "xinix-technology/bono": "1.0.*",
+        "xinix-technology/norm": "1.0.*",
+        "xinix-technology/migrate": "~0.1.0",
+        "xinix-technology/bono-auth": "~1.0.0",
+        "xinix-technology/bono-blade": "~1.0.0",
+        "xinix-technology/jacket": "~0.0.6",
+        "xinix-technology/dapur-xinix": "dev-master",
+        "reekoheek/norm-fdb": "dev-master"
+    }
+   
+}
