@@ -72,7 +72,7 @@ foreach (f('controller')->schema() as $key => $field) {
                                             </td>
                                         @endforeach
                                         <td>
-                                            <a href="" class="xn-check" style="color: green;"></a>
+                                            <a href="{{ f('controller.url', '/'.$entry['$id'].'/attendance') }}" class="xn-check" style="color: green;"></a>
                                             <a href="{{ f('controller.url', '/'.$entry['$id'].'/update') }}" class="xn-pencil"></a>
                                             <a href="{{ f('controller.url', '/'.$entry['$id'].'/delete') }}" class="xn-trash" style="color: red;"></a>
                                         </td>

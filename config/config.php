@@ -73,6 +73,8 @@ return array(
             'default' => 'App\\Controller\\AppController',
             'mapping' => array(
                 '/category' => null,
+                '/statuses' => null,
+                '/rules' => null,
                 '/event' => '\\App\Controller\\EventController',
                 '/attendance' => '\\App\Controller\\AttendanceController',
                 '/icons' => null,

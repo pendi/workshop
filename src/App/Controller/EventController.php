@@ -12,6 +12,7 @@ class EventController extends AppController
         parent::mapRoute();
 
         $this->map('/:idCat/listEvent', 'listEvent')->via('GET', 'POST');
+        $this->map('/:id/attendance', 'attendance')->via('GET', 'POST');
     }
 
     public function sortList(){
@@ -33,16 +34,12 @@ class EventController extends AppController
 
     public function listEvent($idCat)
     {
-    	$modelCategory = Norm::factory("Category");
-
     	$entries = $this->collection->find(array('category' => $idCat))
     		->match($this->getMatch())
             ->sort($this->sortList())
             ->skip($this->getSkip())
             ->limit($this->getLimit());
 
-        // var_dump($this->sortList());exit();
-            
         $this->data['entries'] = $entries;
         $this->data['idCat'] = $idCat;
     }
@@ -190,5 +187,30 @@ class EventController extends AppController
             }
 
         }
+    }
+
+    public function attendance($id)
+    {
+        $modelUser = Norm::factory("User");
+        $modelAttendance = Norm::factory("Attendance");
+        $modelStatuses = Norm::factory("Statuses");
+
+        $users = $modelUser->find(array('username!ne' => 'admin'))->sort(array('first_name' => 1));
+        $dataEvent = $this->collection->findOne($id);
+
+        $dataUser = array();
+        foreach ($users as $key => $user) {
+            // $user = $user->toArray();
+            $dataAttendance = $modelAttendance->findOne(array('user' => $user['$id'], 'event' => $id));
+            $dataStatus = $modelStatuses->findOne(array('code' => $dataAttendance['status']));
+            $user['time'] = $dataAttendance['time'];
+            $user['status'] = $dataStatus['name'];
+            $user['status_color'] = $dataStatus['color'];
+            $dataUser[] = $user;
+            // var_dump($dataUser);exit();
+        }
+
+        $this->data['dataEvent'] = $dataEvent;
+        $this->data['dataUser'] = $dataUser;
     }
 }

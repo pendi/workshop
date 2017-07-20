@@ -178,6 +178,12 @@
 						@if(f('auth.allowed', '/category'))
 						<li><a href="<?php echo URL::site('category') ?>"><i class="icn-left xn xn-book-open"></i> Category <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
+						@if(f('auth.allowed', '/statuses'))
+						<li><a href="<?php echo URL::site('statuses') ?>"><i class="icn-left xn xn-book-open"></i> Status <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						@endif
+						@if(f('auth.allowed', '/rules'))
+						<li><a href="<?php echo URL::site('rules') ?>"><i class="icn-left xn xn-book-open"></i> Rules <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						@endif
 
 						@if(f('auth.allowed', '/table'))
 						<li><a href="<?php echo URL::site('table') ?>"><i class="icn-left xn xn-book-open"></i> Table View <i class="icn-right xn xn-right-open-mini"></i></a></li>
