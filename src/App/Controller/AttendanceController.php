@@ -39,6 +39,10 @@ class AttendanceController extends AppController
                 if ($post['time'] > $late['value']) {
                     $post['status'] = 2;
                 }
+
+                if ($post['time'] == "00:00") {
+                    $post['status'] = 4;
+                }
                 unset($post['result']);
 
                 $status = $post['status'];
