@@ -79,6 +79,12 @@ class Pagination
                     }
                 }
             }
+
+            if (isset($_GET['!sort']) && !empty($_GET['!sort'])) {
+                foreach ($_GET['!sort'] as $k => $val) {
+                    $querystring .= '&!sort[' . $k . ']=' . $val;
+                }
+            }
             
             $this->baseUrl = URL::current() .'?'. $querystring;
         }else{

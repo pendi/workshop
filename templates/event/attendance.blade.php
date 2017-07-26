@@ -29,7 +29,7 @@
 	    margin: auto;
 	    padding: 20px;
 	    border: 1px solid #888;
-	    width: 80%;
+	    width: 50%;
 	}
 
 	/* The Close Button */
@@ -82,6 +82,7 @@
 								<th>Name</th>
 								<th>Time</th>
 								<th>Status</th>
+								<th>Description</th>
 								<th>&nbsp;</th>
 							</tr>
 						</thead>
@@ -90,39 +91,85 @@
 								<tr>
 									<td><?php echo $user['first_name'].' '.$user['last_name'] ?></td>
 									<td id="time-<?php echo $user['$id'] ?>" <?php echo !empty($user['time']) ? 'style="background-color: ' .$user['status_color']. ';"' : '' ?>><?php echo $user['time'] ?></td>
-									<td id="status-<?php echo $user['$id'] ?>" <?php echo !empty($user['time']) ? 'style="background-color: ' .$user['status_color']. ';"' : '' ?>><?php echo $user['status'] ?></td>
-									<td style="text-align: right">
+									<td id="status-<?php echo $user['$id'] ?>" <?php echo !empty($user['time']) ? 'style="background-color: ' .$user['status_color']. ';"' : '' ?>><?php echo $user->format('status') ?></td>
+									<td id="description-<?php echo $user['$id'] ?>" <?php echo !empty($user['time']) ? 'style="background-color: ' .$user['status_color']. ';"' : '' ?>><?php echo $user['description'] ?></td>
+									<td>
 										<?php if (empty($user['time'])): ?>
 											<span id="btnTime-<?php echo $user['$id'] ?>" style="color: green; cursor: pointer;" class="xn-clock" onclick="time('<?php echo $user['$id'] ?>')"></span>
 										<?php else: ?>
 											<span class="xn-clock disable"></span>
 										<?php endif ?>
 										
-										<a href="#" class="xn-doc-text" data-toggle="modal" data-target=".bs-example-modal-sm"></a>
-										<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-				                            <div class="modal-dialog modal-sm" role="document">
-				                                <div class="modal-content">
-				                                    <div class="modal-header bg-darkgrey white">
-				                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				                                        <h4 class="modal-title" id="gridSystemModalLabel">Add Category</h4>
-				                                    </div>
-				                                    <div class="modal-body">
-				                                        <input type="hidden" name="class" value="blog">
-				                                        <div class="form-group">
-				                                            <label for="exampleInputEmail1">Category Name</label>
-				                                            <input type="text" class="form-control" placeholder="Category" name="title">
-				                                        </div>
-				                                        <div class="form-group">
-				                                            <label for="exampleInputPassword1">Parent</label>
-				                                        </div>
-				                                    </div>
-				                                    <div class="modal-footer">
-				                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				                                        <input type="submit" class="btn btn-primary" value="Save">
-				                                    </div>
-				                                </div>
-				                            </div>
-				                        </div>
+										<a href="#" class="xn-doc-text" onclick="myBtn('<?php echo $user['$id'] ?>')"></a>
+										<!-- The Modal -->
+										<div id="myModal-<?php echo $user['$id'] ?>" class="modal">
+
+										 	<!-- Modal content -->
+										 	<div class="modal-content">
+										    	<span class="close" id="close-<?php echo $user['$id'] ?>">&times;</span>
+										    	<?php
+										    		$action = URL::site('attendance/null/createManual');
+										    		if (isset($user['id_attendance']) && !empty($user['id_attendance'])) {
+										    			$action = URL::site('attendance/'.$user['id_attendance'].'/update');
+										    		}
+										    	?>
+										    	<form action="<?php echo $action ?>" method="POST" class="read">
+										    		<div class="row">
+										    			<div class="span-12 medium-12">
+										    				<div class="row">
+										    					<label>Name</label>
+										    					<input type="text" disabled="disabled" value="<?php echo $user['first_name'].' '.$user['last_name'] ?>">
+										    				</div>
+										    			</div>
+										    			<div class="span-12 medium-12">
+										    				<div class="row">
+										    					<label>Status</label>
+										    					<select name="status">
+										    						<option value="1" <?php echo $user['status'] == '1' || $user['status'] == '2' ? 'selected' : '' ?> >Present</option>
+										    						<option value="3" <?php echo $user['status'] == '3' ? 'selected' : '' ?> >Permit</option>
+										    						<option value="4" <?php echo $user['status'] == '4' ? 'selected' : '' ?> >Alpha</option>
+										    					</select>
+										    				</div>
+										    			</div>
+										    			<div class="span-6 medium-12">
+										    				<div class="row">
+										    					<label>Time Hours</label>
+										    					<?php $time_hour = explode(":", $user['time']) ?>
+										    					<select name="hours">
+										    						<?php for ($iHour=0; $iHour<=24; $iHour++) : ?>
+										    							<?php $hours = str_pad($iHour, 2, 0, STR_PAD_LEFT) ?>
+										    							<option value="<?php echo $hours ?>" <?php echo isset($time_hour[0]) && $time_hour[0] == $hours ? 'selected' : '' ?> ><?php echo $hours ?></option>
+										    						<?php endfor ?>
+										    					</select>
+										    				</div>
+										    			</div>
+										    			<div class="span-6 medium-12">
+										    				<div class="row">
+										    					<label>Time Minutes</label>
+										    					<?php $time_minutes = explode(":", $user['time']) ?>
+										    					<select name="minutes">
+										    						<?php for ($iMinutes=0; $iMinutes<=59; $iMinutes++) : ?>
+										    							<?php $minutes = str_pad($iMinutes, 2, 0, STR_PAD_LEFT) ?>
+										    							<option value="<?php echo $minutes ?>" <?php echo isset($time_minutes[1]) && $time_minutes[1] == $minutes ? 'selected' : '' ?> ><?php echo $minutes ?></option>
+										    						<?php endfor ?>
+										    					</select>
+										    				</div>
+										    			</div>
+										    			<div class="span-12 medium-12">
+										    				<div class="row">
+										    					<label>Description</label>
+										    					<textarea name="description" cols="30" rows="10"><?php echo $user['description'] ?></textarea>
+										    				</div>
+										    			</div>
+										    			<div class="span-6 medium-12">
+										    				<div class="row">
+										    					<input type="submit">
+										    				</div>
+										    			</div>
+										    		</div>
+										    	</form>
+										 	</div>
+										</div>
 
 										<?php if (empty($user['time'])): ?>
 											<span id="btnAlpha-<?php echo $user['$id'] ?>" style="color: red; cursor: pointer;" class="xn-cancel-circled" onclick="alpha('<?php echo $user['$id'] ?>')"></span>
@@ -139,42 +186,31 @@
 		</paper-detail>
 	</div>
 
-	<!-- The Modal -->
-	<div id="myModal" class="modal">
-
-	  <!-- Modal content -->
-	  <div class="modal-content">
-	    <span class="close">&times;</span>
-	    <p>Some text in the Modal..</p>
-	  </div>
-
-	</div>
-
 	<script>
-		// Get the modal
-		var modal = document.getElementById('myModal');
+		function myBtn(id) {
+			// Get the modal
+			var modal = document.getElementById('myModal-'+id);
 
-		// Get the button that opens the modal
-		var btn = document.getElementById("myBtn");
+			// Get the button that opens the modal
+			var btn = document.getElementById("myBtn-"+id);
 
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];
+			// Get the <span> element that closes the modal
+			var span = document.getElementById("close-"+id);
 
-		// When the user clicks the button, open the modal 
-		btn.onclick = function() {
-		    modal.style.display = "block";
-		}
+			// When the user clicks the button, open the modal 
+			modal.style.display = "block";
 
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-		    modal.style.display = "none";
-		}
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+			    modal.style.display = "none";
+			}
 
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-		    if (event.target == modal) {
-		        modal.style.display = "none";
-		    }
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			    if (event.target == modal) {
+			        modal.style.display = "none";
+			    }
+			}
 		}
 
 		function time(id) {
@@ -207,6 +243,8 @@
 
 	                    document.getElementById("status-"+id).innerHTML = respon.name;
 	                    document.getElementById("status-"+id).style.backgroundColor = respon.color;
+
+	                    document.getElementById("description-"+id).style.backgroundColor = respon.color;
 	                },
 	        });
 	    }
@@ -241,6 +279,8 @@
 
 	                    document.getElementById("status-"+id).innerHTML = respon.name;
 	                    document.getElementById("status-"+id).style.backgroundColor = respon.color;
+
+	                    document.getElementById("description-"+id).style.backgroundColor = respon.color;
 	                },
 	        });
 	    }

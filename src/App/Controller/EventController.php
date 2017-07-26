@@ -204,7 +204,9 @@ class EventController extends AppController
             $dataAttendance = $modelAttendance->findOne(array('user' => $user['$id'], 'event' => $id));
             $dataStatus = $modelStatuses->findOne(array('code' => $dataAttendance['status']));
             $user['time'] = $dataAttendance['time'];
-            $user['status'] = $dataStatus['name'];
+            $user['description'] = $dataAttendance['description'];
+            $user['id_attendance'] = $dataAttendance['$id'];
+            $user['status'] = $dataStatus['code'];
             $user['status_color'] = $dataStatus['color'];
             $dataUser[] = $user;
             // var_dump($dataUser);exit();

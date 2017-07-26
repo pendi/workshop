@@ -2,6 +2,7 @@
 
 use Norm\Schema\String;
 use Norm\Schema\Password;
+use Norm\Schema\Reference;
 use App\Schema\RoleArray;
 
 return array(
@@ -17,6 +18,7 @@ return array(
         'mobile_phone' => String::create('mobile_phone')->filter('trim'),
         'address' => String::create('address')->filter('trim'),
         'role'    => RoleArray::create('role')
-                    ->to('Role', '$id', 'name')->set('list-column', false)
+                    ->to('Role', '$id', 'name')->set('list-column', false),
+        'status' => Reference::create('status')->to('Statuses', 'code', 'name')->set('list-column', false)->set('hidden', true),
     ),
 );

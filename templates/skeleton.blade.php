@@ -203,7 +203,7 @@
 
 						<li class="devider"></li>
 						@if(f('auth.allowed', '/user'))
-						<li><a href="<?php echo URL::site('user') ?>"><i class="icn-left xn xn-users"></i> User View <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						<li><a href="<?php echo URL::site('user?!sort[first_name]=1') ?>"><i class="icn-left xn xn-users"></i> User View <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
 						@if(f('auth.allowed', '/role'))
 						<li><a href="<?php echo URL::site('role') ?>"><i class="icn-left xn xn-vcard"></i> Role View <i class="icn-right xn xn-right-open-mini"></i></a></li>
