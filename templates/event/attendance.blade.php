@@ -46,7 +46,21 @@
 	    text-decoration: none;
 	    cursor: pointer;
 	}
+
+	#parent {
+        height: 350px;
+    }
+    
+    #fixTable {
+        width: 100%;
+    }
 	</style>
+
+	<script>
+        $(document).ready(function() {
+            $("#fixTable").tableHeadFixer({"left" : 1}); 
+        });
+    </script>
 
 	<div class="wrapper">
 		<paper-detail>
@@ -75,8 +89,8 @@
 			</div>
 			<h2 class="subtitle">Participants</h2>
 			<div class="row">
-				<div class="table-container">
-					<table class="nowrap">
+				<div class="table-container" id="parent">
+					<table id="fixTable" class="nowrap">
 						<thead>
 							<tr>
 								<th>Name</th>
@@ -114,6 +128,11 @@
 										    		}
 										    	?>
 										    	<form action="<?php echo $action ?>" method="POST" class="read">
+										    		<?php if (isset($user['id_attendance']) && empty($user['id_attendance'])): ?>
+										    			<input type="hidden" name="event" value="<?php echo $dataEvent['$id'] ?>">
+										    			<input type="hidden" name="user" value="<?php echo $user['$id'] ?>">
+										    			<input type="hidden" name="category" value="<?php echo $dataEvent['category'] ?>">
+										    		<?php endif ?>
 										    		<div class="row">
 										    			<div class="span-12 medium-12">
 										    				<div class="row">
@@ -225,9 +244,11 @@
 
 	        document.getElementById("btnTime-"+id).className += " disable";
 	        document.getElementById("btnTime-"+id).removeAttribute("onclick");
+	        document.getElementById("btnTime-"+id).removeAttribute("style");
 
 	        document.getElementById("btnAlpha-"+id).className += " disable";
 	        document.getElementById("btnAlpha-"+id).removeAttribute("onclick");
+	        document.getElementById("btnAlpha-"+id).removeAttribute("style");
 
 	        $.ajax({
 	            url : "<?php echo URL::site('attendance/null/create') ?>",
@@ -261,9 +282,11 @@
 
 	        document.getElementById("btnTime-"+id).className += " disable";
 	        document.getElementById("btnTime-"+id).removeAttribute("onclick");
+	        document.getElementById("btnTime-"+id).removeAttribute("style");
 
 	        document.getElementById("btnAlpha-"+id).className += " disable";
 	        document.getElementById("btnAlpha-"+id).removeAttribute("onclick");
+	        document.getElementById("btnAlpha-"+id).removeAttribute("style");
 
 	        $.ajax({
 	            url : "<?php echo URL::site('attendance/null/create') ?>",

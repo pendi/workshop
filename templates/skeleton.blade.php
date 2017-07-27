@@ -31,6 +31,7 @@
 
 		@section('customjs')
 			<!-- Custom JS -->
+			<script type="text/javascript" src="<?php echo Theme::base('js/fixed/tableHeadFixer.js') ?>"></script>
 		@show
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

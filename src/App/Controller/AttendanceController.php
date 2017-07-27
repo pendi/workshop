@@ -34,6 +34,7 @@ class AttendanceController extends AppController
                     $post['event'] = $post['result'][2];
                     $post['category'] = $post['result'][3];
                     $post['status'] = 1;
+                    $post['description'] = "";
                 }
 
                 if ($post['time'] > $late['value']) {
@@ -86,17 +87,35 @@ class AttendanceController extends AppController
 
     public function createManual()
     {
+        $modelRules = Norm::factory("Rules");
+
         $entry = $this->collection->newInstance()->set($this->getCriteria());
 
         $this->data['entry'] = $entry;
 
+        $late = $modelRules->findOne(array("name" => "Late"));
+
         if ($this->request->isPost()) {
             try {
-                $post = $this->request->post();
-                var_dump($post);exit();
-                $result = $entry->set($this->request->getBody())->save();
+                $post = $this->request->getBody();
+                $post['time'] = $post['hours'].':'.$post['minutes'];
 
-                h('notification.info', $this->clazz.' created.');
+                if ($post['status'] == 1 && $post['time'] > $late['value']) {
+                    $post['status'] = 2;
+                }
+
+                if ($post['status'] == 3 || $post['status'] == 4) {
+                    $post['time'] = "00:00";
+                }
+
+                unset($post['hours']);
+                unset($post['minutes']);
+
+                $result = $entry->set($post)->save();
+
+                h('notification.info', 'Participants updated.');
+
+                $this->redirect(\URL::site('event/'.$post['event'].'/attendance'));
 
                 h('controller.create.success', array(
                     'model' => $entry
@@ -121,7 +140,7 @@ class AttendanceController extends AppController
 
 
 
-    public function createUpdate($id)
+    public function update($id)
     {
         $modelRules = Norm::factory("Rules");
 
@@ -131,34 +150,31 @@ class AttendanceController extends AppController
             try {
                 $post = $this->request->getBody();
                 $attendance = $this->collection->findOne($id);
-                var_dump(count($attendance));exit();
-                if (count($attendance) != 0) {
-                    $time = $post['hours'].':'.$post['minutes'];
-                    if ($post['status'] == 1 && $time > $late['value']) {
-                        $post['status'] = 2;
-                    }
 
-                    $post['time'] = $time;
-                    if ($post['status'] == 3 || $post['status'] == 4) {
-                        $post['time'] = "00:00";
-                    }
-
-                    unset($post['hours']);
-                    unset($post['minutes']);
-
-                    $merged = array_merge(
-                        isset($attendance) ? $attendance->dump() : array(),
-                        $post ?: array()
-                    );
-
-                    $attendance->set($merged)->save();
-
-                    h('notification.info', 'Participants updated');
-
-                    $this->redirect(\URL::site('event/'.$merged['event'].'/attendance'));
-                } else {
-                    var_dump($post);exit();
+                $time = $post['hours'].':'.$post['minutes'];
+                if ($post['status'] == 1 && $time > $late['value']) {
+                    $post['status'] = 2;
                 }
+
+                $post['time'] = $time;
+                if ($post['status'] == 3 || $post['status'] == 4) {
+                    $post['time'] = "00:00";
+                }
+
+                unset($post['hours']);
+                unset($post['minutes']);
+
+                $merged = array_merge(
+                    isset($attendance) ? $attendance->dump() : array(),
+                    $post ?: array()
+                );
+
+                $attendance->set($merged)->save();
+
+                h('notification.info', 'Participants updated');
+
+                $this->redirect(\URL::site('event/'.$merged['event'].'/attendance'));
+                
             } catch (Stop $e) {
                 throw $e;
             } catch (Exception $e) {
