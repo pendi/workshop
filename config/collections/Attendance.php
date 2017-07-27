@@ -12,11 +12,5 @@ return array(
         'status' => Reference::create('status')->to('Statuses', 'name')->set('list-column', false),
         'category' => Reference::create('category')->to('Category', 'name')->set('list-column', false),
         'description' => Text::create('description')->filter('trim')->set('list-column', false),
-
-
-        // 'name' => String::create('name')->filter('trim|required')->set('list-column', true),
-        // 'title' => String::create('title')->filter('trim|required')->set('list-column', true),
-        // 'date' => Date::create('date')->filter('trim|required')->set('list-column', true),
-        // 'category' => Reference::create('category')->to('Category', '$id', 'name')->set('list-column', true)->set('hidden', true)
     ),
 );
