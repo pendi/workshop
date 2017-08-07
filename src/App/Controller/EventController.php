@@ -158,6 +158,12 @@ class EventController extends AppController
                         continue;
                     }
 
+                    $dataAttendances = \Norm::factory("Attendance")->find(array('event' => $value));
+
+                    foreach ($dataAttendances as $key => $attendance) {
+                        $attendance->remove();
+                    }
+
                     $model->remove();
 
                     $this->data['entries'][] = $model;
