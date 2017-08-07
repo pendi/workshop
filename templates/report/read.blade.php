@@ -22,7 +22,7 @@
             <table class="table nowrap hover">
                 <thead>
                     <tr>
-                    	<th>&nbsp;</th>
+                    	<th>Event</th>
                     	<?php foreach ($dataUsers as $key => $user): ?>
                     		<th><?php echo $user['first_name'].' '.$user['last_name'] ?></th>
                     	<?php endforeach ?>
@@ -33,8 +33,8 @@
                     	<tr>
                     		<td><b>(<?php echo date("d M Y", strtotime($event['date'])) ?>)</b> <?php echo $event['name'] ?></td>
                     		<?php foreach ($event['attendance'] as $att => $attendance): ?>
-                				<?php //var_dump($attendance);exit(); ?>
-                    			<td><?php echo $attendance['user'] ?></td>
+                				<?php //var_dump($attendance['first_name']);exit(); ?>
+                    			<td style="border: 1px solid rgb(221, 221, 221); background-color: <?php echo $attendance['status_color'] ?>"><?php echo $attendance['time'] ?></td>
                     		<?php endforeach ?>
                     	</tr>
                 	<?php endforeach ?>
