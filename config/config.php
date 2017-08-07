@@ -75,6 +75,7 @@ return array(
                 '/category' => null,
                 '/statuses' => null,
                 '/rules' => null,
+                '/report' => '\\App\Controller\\ReportController',
                 '/event' => '\\App\Controller\\EventController',
                 '/attendance' => '\\App\Controller\\AttendanceController',
                 '/icons' => null,

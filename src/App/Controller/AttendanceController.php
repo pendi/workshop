@@ -50,6 +50,8 @@ class AttendanceController extends AppController
 
                 $result = $entry->set($post)->save();
 
+                $id = $entry->getId();
+
                 h('notification.info', $this->clazz.' created.');
 
                 h('controller.create.success', array(
@@ -78,7 +80,8 @@ class AttendanceController extends AppController
         $entryStatus = array(
             "code" => $dataStatus['code'],
             "name" => $dataStatus['name'],
-            "color" => $dataStatus['color']
+            "color" => $dataStatus['color'],
+            "id_attendance" => $id
         );
 
         echo json_encode($entryStatus);
@@ -163,6 +166,7 @@ class AttendanceController extends AppController
 
                 unset($post['hours']);
                 unset($post['minutes']);
+
 
                 $merged = array_merge(
                     isset($attendance) ? $attendance->dump() : array(),

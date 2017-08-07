@@ -100,6 +100,9 @@ foreach (f('controller')->schema() as $key => $field) {
                                                 @endif
                                             </td>
                                         @endforeach
+                                        <td>
+                                            <a href="{{ f('controller.url', '/'.$entry['$id'].'/delete') }}" class="xn-trash" style="color: red; float: right;"></a>
+                                        </td>
                                     @else
                                         <td><a href="{{ f('controller.url', '/'.$entry['$id']) }}">{{ $entry->format() }}</a></td>
                                     @endif

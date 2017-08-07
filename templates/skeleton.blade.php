@@ -185,7 +185,11 @@
 						@if(f('auth.allowed', '/rules'))
 						<li><a href="<?php echo URL::site('rules') ?>"><i class="icn-left xn xn-book-open"></i> Rules <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
+						@if(f('auth.allowed', '/report'))
+						<li><a href="<?php echo URL::site('report') ?>"><i class="icn-left xn xn-book-open"></i> Report <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						@endif
 
+						<li class="devider"></li>
 						@if(f('auth.allowed', '/table'))
 						<li><a href="<?php echo URL::site('table') ?>"><i class="icn-left xn xn-book-open"></i> Table View <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif

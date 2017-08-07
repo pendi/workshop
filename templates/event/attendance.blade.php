@@ -127,7 +127,7 @@
 										    			$action = URL::site('attendance/'.$user['id_attendance'].'/update');
 										    		}
 										    	?>
-										    	<form action="<?php echo $action ?>" method="POST" class="read">
+										    	<form action="<?php echo $action ?>" method="POST" class="read" id="attendance_form-<?php echo $user['$id'] ?>">
 										    		<?php if (isset($user['id_attendance']) && empty($user['id_attendance'])): ?>
 										    			<input type="hidden" name="event" value="<?php echo $dataEvent['$id'] ?>">
 										    			<input type="hidden" name="user" value="<?php echo $user['$id'] ?>">
@@ -143,7 +143,7 @@
 										    			<div class="span-12 medium-12">
 										    				<div class="row">
 										    					<label>Status</label>
-										    					<select name="status">
+										    					<select name="status" id="status-<?php echo $user['$id'] ?>">
 										    						<option value="1" <?php echo $user['status'] == '1' || $user['status'] == '2' ? 'selected' : '' ?> >Present</option>
 										    						<option value="3" <?php echo $user['status'] == '3' ? 'selected' : '' ?> >Permit</option>
 										    						<option value="4" <?php echo $user['status'] == '4' ? 'selected' : '' ?> >Alpha</option>
@@ -154,7 +154,7 @@
 										    				<div class="row">
 										    					<label>Time Hours</label>
 										    					<?php $time_hour = explode(":", $user['time']) ?>
-										    					<select name="hours">
+										    					<select name="hours" id="hour-<?php echo $user['$id'] ?>">
 										    						<?php for ($iHour=0; $iHour<=24; $iHour++) : ?>
 										    							<?php $hours = str_pad($iHour, 2, 0, STR_PAD_LEFT) ?>
 										    							<option value="<?php echo $hours ?>" <?php echo isset($time_hour[0]) && $time_hour[0] == $hours ? 'selected' : '' ?> ><?php echo $hours ?></option>
@@ -166,7 +166,7 @@
 										    				<div class="row">
 										    					<label>Time Minutes</label>
 										    					<?php $time_minutes = explode(":", $user['time']) ?>
-										    					<select name="minutes">
+										    					<select name="minutes" id="minute-<?php echo $user['$id'] ?>">
 										    						<?php for ($iMinutes=0; $iMinutes<=59; $iMinutes++) : ?>
 										    							<?php $minutes = str_pad($iMinutes, 2, 0, STR_PAD_LEFT) ?>
 										    							<option value="<?php echo $minutes ?>" <?php echo isset($time_minutes[1]) && $time_minutes[1] == $minutes ? 'selected' : '' ?> ><?php echo $minutes ?></option>
@@ -259,6 +259,12 @@
 	                	var respon = $.parseJSON(respon);
         				console.log(respon.name);
 
+				        var action = "<?php echo URL::site('attendance/"+respon.id_attendance+"/update') ?>";
+				        document.getElementById("attendance_form-"+id).action = action;
+
+				        $('#hour-'+id).val((d.getHours()<10?'0':'') + d.getHours()).change();
+				        $('#minute-'+id).val((d.getMinutes()<10?'0':'') + d.getMinutes()).change();
+
 	                    document.getElementById("time-"+id).innerHTML = time;
 	                    document.getElementById("time-"+id).style.backgroundColor = respon.color;
 
@@ -296,6 +302,13 @@
 	                {
 	                	var respon = $.parseJSON(respon);
         				console.log(respon.name);
+
+        				var action = "<?php echo URL::site('attendance/"+respon.id_attendance+"/update') ?>";
+				        document.getElementById("attendance_form-"+id).action = action;
+				        
+				        // $('#hour-'+id).val((d.getHours()<10?'0':'') + d.getHours()).change();
+				        // $('#minute-'+id).val((d.getMinutes()<10?'0':'') + d.getMinutes()).change();
+				        $('#status-'+id).val(respon.code).change();
 
 	                    document.getElementById("time-"+id).innerHTML = time;
 	                    document.getElementById("time-"+id).style.backgroundColor = respon.color;
