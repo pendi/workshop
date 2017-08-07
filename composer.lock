@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a535e5ff5026118fbd7214da9160af6",
+    "content-hash": "37adb145ce8ae5c3505f3af66fd5ed13",
     "packages": [
         {
             "name": "filp/whoops",
@@ -405,16 +405,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.9",
+            "version": "v2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "6968531206671f94377b01dc7888d5d1b858a01b"
+                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/6968531206671f94377b01dc7888d5d1b858a01b",
-                "reference": "6968531206671f94377b01dc7888d5d1b858a01b",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
                 "shasum": ""
             },
             "require": {
@@ -449,7 +449,64 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-03-03T20:43:42+00:00"
+            "time": "2017-03-13T16:27:32+00:00"
+        },
+        {
+            "name": "phpoffice/phpexcel",
+            "version": "1.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPExcel.git",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPExcel": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://blog.rootslabs.net"
+                },
+                {
+                    "name": "Erik Tilt"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "http://phpexcel.codeplex.com",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "time": "2015-05-01T07:00:55+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -677,25 +734,28 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.2.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "b7a1b9e0a0f623ce43b4c8d775eb138f190c9d8d"
+                "reference": "67535f1e3fd662bdc68d7ba317c93eecd973617e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/b7a1b9e0a0f623ce43b4c8d775eb138f190c9d8d",
-                "reference": "b7a1b9e0a0f623ce43b4c8d775eb138f190c9d8d",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/67535f1e3fd662bdc68d7ba317c93eecd973617e",
+                "reference": "67535f1e3fd662bdc68d7ba317c93eecd973617e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9"
             },
+            "conflict": {
+                "symfony/dependency-injection": "<3.3"
+            },
             "require-dev": {
                 "psr/log": "~1.0",
                 "symfony/config": "~2.8|~3.0",
-                "symfony/dependency-injection": "~2.8|~3.0",
+                "symfony/dependency-injection": "~3.3",
                 "symfony/expression-language": "~2.8|~3.0",
                 "symfony/stopwatch": "~2.8|~3.0"
             },
@@ -706,7 +766,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "3.3-dev"
                 }
             },
             "autoload": {
@@ -733,7 +793,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-21T09:12:04+00:00"
+            "time": "2017-06-09T14:53:08+00:00"
         },
         {
             "name": "symfony/finder",
@@ -957,12 +1017,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/xinix-technology/dapur-xinix.git",
-                "reference": "ee5b7c082337536f255212b20e0b2703006b386a"
+                "reference": "6928a82451dafdcc56599d02197cfe5127230e62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xinix-technology/dapur-xinix/zipball/ee5b7c082337536f255212b20e0b2703006b386a",
-                "reference": "ee5b7c082337536f255212b20e0b2703006b386a",
+                "url": "https://api.github.com/repos/xinix-technology/dapur-xinix/zipball/6928a82451dafdcc56599d02197cfe5127230e62",
+                "reference": "6928a82451dafdcc56599d02197cfe5127230e62",
                 "shasum": ""
             },
             "require": {
@@ -991,7 +1051,7 @@
                 "source": "https://github.com/xinix-technology/dapur-xinix/tree/master",
                 "issues": "https://github.com/xinix-technology/dapur-xinix/issues"
             },
-            "time": "2017-03-03 00:02:51"
+            "time": "2017-04-26 10:13:02"
         },
         {
             "name": "xinix-technology/jacket",

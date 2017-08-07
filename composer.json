@@ -22,7 +22,8 @@
         "xinix-technology/bono-blade": "~1.0.0",
         "xinix-technology/jacket": "~0.0.6",
         "xinix-technology/dapur-xinix": "dev-master",
-        "reekoheek/norm-fdb": "dev-master"
+        "reekoheek/norm-fdb": "dev-master",
+        "phpoffice/phpexcel": "~1.8"
     }
    
 }

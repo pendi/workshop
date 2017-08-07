@@ -6,20 +6,26 @@
 
 @section('back')
     <ul class="flat left">
-        <li><a href="{{ f('controller.url') }}"><i class="xn xn-left-open"></i>{{ l('Back') }}</a></li>
-        @if(f('auth.allowed', f('controller.uri', '/null/create')))
-            <li><a href="{{ f('controller.url', '/null/create') }}"><i class="xn xn-plus"></i>{{ l('New') }}</a></li>
-        @endif
-        @if(f('auth.allowed', f('controller.uri', '/id/update')))
-            <li><a href="{{ f('controller.url', '/:id/update') }}"><i class="xn xn-pencil"></i> {{ l('Edit') }}</a></li>
-        @endif
+        <li><a href="{{ f('controller.url') }}"><i class="xn-left-open"></i>{{ l('Back') }}</a></li>
+        <li><a href="{{ f('controller.url', '/'.$entry['$id'].'?export=1') }}"><i class="xn-export"></i> {{ l('Export') }}</a></li>
     </ul>
 @stop
 
 @section('fields')
+    <style>
+        #parent {
+            max-height: 470px;
+        }
+        
+        #fixTable {
+            width: 100%;
+        }
+    </style>
+
+    <h3>Report <?php echo $entry['name'] ?></h3>
     <div class="read">
-    	<div class="table-container">
-            <table class="table nowrap hover">
+    	<div class="table-container" id="parent">
+            <table id="fixTable" class="table nowrap hover">
                 <thead>
                     <tr>
                     	<th>Event</th>
@@ -33,8 +39,7 @@
                     	<tr>
                     		<td><b>(<?php echo date("d M Y", strtotime($event['date'])) ?>)</b> <?php echo $event['name'] ?></td>
                     		<?php foreach ($event['attendance'] as $att => $attendance): ?>
-                				<?php //var_dump($attendance['first_name']);exit(); ?>
-                    			<td style="border: 1px solid rgb(221, 221, 221); background-color: <?php echo $attendance['status_color'] ?>"><?php echo $attendance['time'] ?></td>
+                    			<td style="border-right: 1px solid rgb(221, 221, 221); background-color: <?php echo $attendance['status_color'] ?>"><span data-toggle="tooltip" title="<?php echo $attendance['tooltip'] ?>"><?php echo $attendance['time'] ?></span></td>
                     		<?php endforeach ?>
                     	</tr>
                 	<?php endforeach ?>
@@ -42,6 +47,13 @@
             </table>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#fixTable").tableHeadFixer({"left" : 1}); 
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 @stop
 
 @section('contextual.content')
