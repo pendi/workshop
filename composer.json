@@ -23,7 +23,8 @@
         "xinix-technology/jacket": "~0.0.6",
         "xinix-technology/dapur-xinix": "dev-master",
         "reekoheek/norm-fdb": "dev-master",
-        "phpoffice/phpexcel": "~1.8"
+        "phpoffice/phpexcel": "~1.8",
+        "ghunti/highcharts-php": "~2.0"
     }
    
 }
