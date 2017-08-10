@@ -72,6 +72,10 @@
 				{{ f('notification.show') }}
 			@show
 
+			<?php
+				$user = \Norm::factory("User")->findOne($_SESSION['user']['$id']);
+			?>
+
 			@section('topbar')
 				<nav class="nav-menu">
 					<div class="pull-left">
@@ -102,72 +106,10 @@
 					<div class="pull-right">
 						@section('usermenu')
 							<ul class="topbar">
-								<li class="sub notification">
-									<a href="#">
-										<i class="xn xn-bell"></i>
-										<span class="badge solid round error">2</span>
-									</a>
-									<ul class="context-menu higher right">
-                                    <li>
-                                        <section class="comments">
-                                            <article class="comment yellow">
-                                                <div class="comment-body">
-                                                    <p class="date">20 Januari 2016 2:53 PM</p>
-                                                    <h6 class="regular">Tidak ada pengumuman</h6>
-                                                    <p>Tidak ada pengumuman untuk hari ini</p>
-                                                </div>
-                                            </article>
-
-                                            <article class="comment green">
-                                                <div class="comment-body">
-                                                    <p class="date">18 Januari 2016 2:53 PM</p>
-                                                    <h6 class="regular">Sakit</h6>
-                                                    <p>Izin sakit kepala</p>
-                                                    <a href="#" class="button solid success">
-                                                        Disetujui
-                                                    </a>
-                                                </div>
-                                            </article>
-
-                                            <article class="comment green">
-                                                <div class="comment-body">
-                                                    <p class="date">20 Januari 2016 2:53 PM</p>
-                                                    <h6 class="regular">Tidak ada Pengumuman</h6>
-                                                    <p>Tidak ada Pengumuman untuk hari ini</p>
-                                                    <a href="#" class="button success">
-                                                        <i class="xn xn-check"></i>
-                                                        Setuju
-                                                    </a>
-                                                    <a href="#" class="button error">
-                                                        <i class="xn xn-cancel"></i>
-                                                        Tolak
-                                                    </a>
-                                                </div>
-                                            </article>
-
-                                            <article class="comment red">
-                                                <div class="comment-body">
-                                                    <p class="date">3 Januari 2016 2:53 PM</p>
-                                                    <h6 class="regular">Anda Alpa 1</h6>
-                                                    <p>Anda tercatat alpa 1 hari ini</p>
-                                                </div>
-                                            </article>
-
-                                            <article class="comment red">
-                                                <div class="comment-body">
-                                                    <p class="date">2 Januari 2016 2:53 PM</p>
-                                                    <h6 class="regular">Anda Sakit</h6>
-                                                    <p>Anda tercatat sakit hari ini</p>
-                                                </div>
-                                            </article>
-                                        </section>
-                                    </li>
-                                </ul>
-								</li>
 								<li class="sub user">
 									<a href="#">
 										<!-- <span class="photo" style="background-image: url('http://lorempixel.com/200/200/people');"></span> -->
-										<span>Admin</span>
+										<span><?php echo $user['first_name'].' '.$user['last_name'] ?></span>
 										<i class="xn xn-down-open-mini"></i>
 									</a>
 									<ul class="context-menu higher right" style="padding: 0px">
@@ -183,42 +125,24 @@
 			@section('sidebar')
 				<aside class="sidebar">
 					<ul class="nav with-icon">
-						<li><a href="<?php echo URL::site() ?>"><i class="icn-left xn xn-home"></i> Dashboard <span class="icn-right badge round solid error">10</span></a></li>
+						<li><a href="<?php echo URL::site() ?>"><i class="icn-left xn xn-home"></i> Dashboard <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						<li class="devider"></li>
 						@if(f('auth.allowed', '/event'))
-						<li><a href="<?php echo URL::site('event') ?>"><i class="icn-left xn xn-book-open"></i> Event <i class="icn-right xn xn-right-open-mini"></i></a></li>
-						@endif
-						@if(f('auth.allowed', '/attendance'))
-						<li><a href="<?php echo URL::site('attendance') ?>"><i class="icn-left xn xn-book-open"></i> Attendance <i class="icn-right xn xn-right-open-mini"></i></a></li>
-						@endif
-						@if(f('auth.allowed', '/category'))
-						<li><a href="<?php echo URL::site('category') ?>"><i class="icn-left xn xn-book-open"></i> Category <i class="icn-right xn xn-right-open-mini"></i></a></li>
-						@endif
-						@if(f('auth.allowed', '/statuses'))
-						<li><a href="<?php echo URL::site('statuses') ?>"><i class="icn-left xn xn-book-open"></i> Status <i class="icn-right xn xn-right-open-mini"></i></a></li>
-						@endif
-						@if(f('auth.allowed', '/rules'))
-						<li><a href="<?php echo URL::site('rules') ?>"><i class="icn-left xn xn-book-open"></i> Rules <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						<li><a href="<?php echo URL::site('event') ?>"><i class="icn-left xn xn-check"></i> Event <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
 						@if(f('auth.allowed', '/report'))
-						<li><a href="<?php echo URL::site('report') ?>"><i class="icn-left xn xn-book-open"></i> Report <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						<li><a href="<?php echo URL::site('report') ?>"><i class="icn-left xn xn-chart-area"></i> Report <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
 
 						<li class="devider"></li>
-						@if(f('auth.allowed', '/table'))
-						<li><a href="<?php echo URL::site('table') ?>"><i class="icn-left xn xn-book-open"></i> Table View <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						@if(f('auth.allowed', '/category'))
+						<li><a href="<?php echo URL::site('category') ?>"><i class="icn-left xn xn-list-add"></i> Category <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
-						@if(f('auth.allowed', '/list'))
-						<li><a href="<?php echo URL::site('list') ?>"><i class="icn-left xn xn-menu"></i> List View <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						@if(f('auth.allowed', '/statuses'))
+						<li><a href="<?php echo URL::site('statuses') ?>"><i class="icn-left xn xn-list-add"></i> Status <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
-						@if(f('auth.allowed', '/grid'))
-						<li><a href="<?php echo URL::site('grid') ?>"><i class="icn-left xn xn-layout"></i> Grid View <i class="icn-right xn xn-right-open-mini"></i></a></li>
-						@endif
-						@if(f('auth.allowed', '/detail'))
-						<li><a href="<?php echo URL::site('detail') ?>"><i class="icn-left xn xn-newspaper"></i> Detail View <i class="icn-right xn xn-right-open-mini"></i></a></li>
-						@endif
-						@if(f('auth.allowed', '/form'))
-						<li><a href="<?php echo URL::site('form') ?>"><i class="icn-left xn xn-keyboard"></i> Form View <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						@if(f('auth.allowed', '/rules'))
+						<li><a href="<?php echo URL::site('rules') ?>"><i class="icn-left xn xn-list-add"></i> Rules <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
 
 						<li class="devider"></li>
@@ -230,10 +154,6 @@
 						@endif
 						@if(f('auth.allowed', '/previleges'))
 						<li><a href="<?php echo URL::site('previleges') ?>"><i class="icn-left xn xn-vcard"></i> Previleges View <i class="icn-right xn xn-right-open-mini"></i></a></li>
-						@endif
-						<li class="devider"></li>
-						@if(f('auth.allowed', '/icons'))
-						<li><a href="<?php echo URL::site('icons') ?>"><i class="icn-left xn xn-heart"></i> New Icons <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
 					</ul>
 				</aside>
