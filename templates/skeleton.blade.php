@@ -73,7 +73,9 @@
 			@show
 
 			<?php
-				$user = \Norm::factory("User")->findOne($_SESSION['user']['$id']);
+				if (isset($_SESSION['user'])) {
+					$user = \Norm::factory("User")->findOne($_SESSION['user']['$id']);
+				}
 			?>
 
 			@section('topbar')
@@ -108,9 +110,11 @@
 							<ul class="topbar">
 								<li class="sub user">
 									<a href="#">
-										<!-- <span class="photo" style="background-image: url('http://lorempixel.com/200/200/people');"></span> -->
-										<span><?php echo $user['first_name'].' '.$user['last_name'] ?></span>
-										<i class="xn xn-down-open-mini"></i>
+										<?php if (isset($_SESSION['user'])): ?>
+											<!-- <span class="photo" style="background-image: url('http://lorempixel.com/200/200/people');"></span> -->
+											<span><?php echo $user['first_name'].' '.$user['last_name'] ?></span>
+											<i class="xn xn-down-open-mini"></i>
+										<?php endif ?>
 									</a>
 									<ul class="context-menu higher right" style="padding: 0px">
 										<li><a href="<?php echo URL::site('logout')?>">LogOut</a></li>	
@@ -147,7 +151,7 @@
 
 						<li class="devider"></li>
 						@if(f('auth.allowed', '/user'))
-						<li><a href="<?php echo URL::site('user?!sort[first_name]=1') ?>"><i class="icn-left xn xn-users"></i> User View <i class="icn-right xn xn-right-open-mini"></i></a></li>
+						<li><a href="<?php echo URL::site('user') ?>"><i class="icn-left xn xn-users"></i> User View <i class="icn-right xn xn-right-open-mini"></i></a></li>
 						@endif
 						@if(f('auth.allowed', '/role'))
 						<li><a href="<?php echo URL::site('role') ?>"><i class="icn-left xn xn-vcard"></i> Role View <i class="icn-right xn xn-right-open-mini"></i></a></li>

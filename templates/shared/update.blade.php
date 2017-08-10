@@ -9,13 +9,13 @@
 @section('back')
     <ul class="flat left">
         @if(f('auth.allowed', f('controller.uri', '/id/read')))
-        <li><a href="{{ f('controller.url', '/:id/read') }}"><i class="xn xn-left-open"></i>{{ l('Back') }}</a></li>
+        <li><a href="{{ f('controller.url') }}"><i class="xn xn-left-open"></i>{{ l('Back') }}</a></li>
         @endif
         @if(f('auth.allowed', f('controller.uri', '/null/create')))
-        <li><a href="{{ f('controller.url', '/null/create') }}" class="disable"><i class="xn xn-plus"></i>{{ l('New') }}</a></li>
+        <li><a href="{{ f('controller.url', '/null/create') }}"><i class="xn xn-plus"></i>{{ l('New') }}</a></li>
         @endif
         @if(f('auth.allowed', f('controller.uri', '/id/update')))
-        <li><a href="{{ f('controller.url','/:id/update') }}" class="disable"><i class="xn xn-pencil"></i> {{ l('Edit') }}</a></li>
+        <li><a href="#" class="disable"><i class="xn xn-pencil"></i> {{ l('Edit') }}</a></li>
         @endif
     </ul>
 @stop

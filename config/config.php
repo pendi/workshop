@@ -83,7 +83,7 @@ return array(
                 '/list' => null,
                 '/grid' => null,
                 '/detail' => null,
-                '/user' => null,
+                '/user' => '\\App\Controller\\UserController',
                 '/form' => null,
                 '/previleges' => null,
                 '/role' => '\\App\Controller\\RoleController'

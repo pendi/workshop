@@ -130,7 +130,7 @@ foreach (f('controller')->schema() as $key => $field) {
 @stop
 
 @section('templatemodal')
-    <div id="templatemodal" class="modal fade" tabindex="-1" role="dialog">
+    <div id="deletemodal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
