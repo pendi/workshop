@@ -102,10 +102,11 @@
 						</thead>
 						<tbody>
 							<?php foreach ($dataUser as $user): ?>
+								<?php //var_dump($user);exit(); ?>
 								<tr>
 									<td><?php echo $user['first_name'].' '.$user['last_name'] ?></td>
 									<td id="time-<?php echo $user['$id'] ?>" <?php echo !empty($user['time']) ? 'style="background-color: ' .$user['status_color']. ';"' : '' ?>><?php echo $user['time'] ?></td>
-									<td id="status-<?php echo $user['$id'] ?>" <?php echo !empty($user['time']) ? 'style="background-color: ' .$user['status_color']. ';"' : '' ?>><?php echo $user->format('status') ?></td>
+									<td id="status-<?php echo $user['$id'] ?>" <?php echo !empty($user['time']) ? 'style="background-color: ' .$user['status_color']. ';"' : '' ?>><?php echo $user['status_name'] ?></td>
 									<td id="description-<?php echo $user['$id'] ?>" <?php echo !empty($user['time']) ? 'style="background-color: ' .$user['status_color']. ';"' : '' ?>><?php echo $user['description'] ?></td>
 									<td>
 										<?php if (empty($user['time'])): ?>

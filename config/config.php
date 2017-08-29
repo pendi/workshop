@@ -61,7 +61,7 @@ return array(
         'Bono\\Provider\\LanguageProvider' => null,
         'App\\Provider\\AppProvider',
         // uncomment below to enable auth
-        // 'App\\Provider\\LoginProvider',
+        'App\\Provider\\LoginProvider',
         'DapurXinix\\Provider\\DapurXinixProvider'=>array(
                 'Upload_Directory' => dirname(__DIR__).'/www/data',// set directory for upload on application 
                 'bucket' => 'data'

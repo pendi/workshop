@@ -34,6 +34,7 @@ class ReportController extends AppController
         $modelEvent = Norm::factory("Event");
         $modelAttendance = Norm::factory("Attendance");
         $modelStatuses = Norm::factory("Statuses");
+        $modelRole = Norm::factory("Role");
 
         $get = $this->request->get();
 
@@ -43,7 +44,19 @@ class ReportController extends AppController
             // noop
         }
 
-        $dataUsers = $modelUser->find(array('username!ne' => 'admin'))->sort(array('first_name' => 1));
+        $roleName = array();
+        foreach ($_SESSION['user']['role'] as $key => $role) {
+            $dataRole = $modelRole->findOne($role);
+
+            $roleName[] = $dataRole['name'];
+        }
+
+        $searcUser = array('username!ne' => 'admin');
+        if (in_array("User", $roleName)) {
+            $searcUser = array('$id' => $_SESSION['user']['$id']);
+        }
+
+        $dataUsers = $modelUser->find($searcUser)->sort(array('first_name' => 1));
         $eventEntries = $modelEvent->find(array('category' => $id))->sort(array('date' => 1));
 
         $dataEvents = array();

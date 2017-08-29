@@ -213,6 +213,7 @@ class EventController extends AppController
             $user['description'] = $dataAttendance['description'];
             $user['id_attendance'] = $dataAttendance['$id'];
             $user['status'] = $dataStatus['code'];
+            $user['status_name'] = $dataStatus['name'];
             $user['status_color'] = $dataStatus['color'];
             $dataUser[] = $user;
             // var_dump($dataUser);exit();
