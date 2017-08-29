@@ -41,6 +41,7 @@
 
 		@section('customcss')
 			<!-- Custom CSS -->
+			<link href="<?php echo Theme::base('css/select2.min.css') ?>" rel="stylesheet">
 		@show
 
 		<script src="<?php echo Theme::base('vendor/jquery/dist/jquery.min.js')?>"></script>
@@ -51,6 +52,7 @@
 		@section('customjs')
 			<!-- Custom JS -->
 			<script type="text/javascript" src="<?php echo Theme::base('js/fixed/tableHeadFixer.js') ?>"></script>
+			<script type="text/javascript" src="<?php echo Theme::base('js/select2.min.js') ?>"></script>
 		@show
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -172,6 +174,14 @@
 						<div class="wrapper">
 							@section('fields')
 								&nbsp;
+							@show
+
+							@section('select2')
+								<script type="text/javascript">
+							        $(document).ready(function() {
+							        	$(".select-2").select2();
+							        });
+							    </script>
 							@show
 						</div>
 					@show

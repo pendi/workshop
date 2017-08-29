@@ -46,15 +46,18 @@ class EventController extends AppController
 
     public function create()
     {
-    	$modelCategory = Norm::factory("Category");
+        $modelCategory = Norm::factory("Category");
+    	$modelUser = Norm::factory("User");
 
     	$get = $this->request->get();
 
         $entry = $this->collection->newInstance()->set($this->getCriteria());
         $category = $modelCategory->findOne($get['cat']);
+        $dataUsers = $modelUser->find(array('username!ne' => 'admin'))->sort(array('first_name' => 1));
 
         $this->data['entry'] = $entry;
         $this->data['category'] = $category;
+        $this->data['dataUsers'] = $dataUsers;
 
         if ($this->request->isPost()) {
             try {
